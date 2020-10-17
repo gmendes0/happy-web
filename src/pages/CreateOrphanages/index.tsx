@@ -1,6 +1,7 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import { LeafletMouseEvent } from "leaflet";
+import InputMask from "react-input-mask";
 
 import { FiPlus } from "react-icons/fi";
 
@@ -21,6 +22,7 @@ export default function CreateOrphanage() {
   const [open_on_weekends, setOpenOnWeekends] = useState(false);
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [whatsapp, setWhatsapp] = useState("");
 
   function handleMapClick(event: LeafletMouseEvent) {
     const { lat, lng } = event.latlng;
@@ -55,6 +57,7 @@ export default function CreateOrphanage() {
     data.append("instructions", instructions);
     data.append("opening_hours", opening_hours);
     data.append("open_on_weekends", String(open_on_weekends));
+    data.append("whatsapp", whatsapp.replace(/\D/g, ""));
 
     images.forEach((image) => {
       data.append("images", image);
@@ -113,6 +116,15 @@ export default function CreateOrphanage() {
                 maxLength={300}
                 value={about}
                 onChange={(event) => setAbout(event.target.value)}
+              />
+            </div>
+
+            <div className="input-block">
+              <label htmlFor="whatsapp">Número de Whatsapp</label>
+              <InputMask
+                mask="+99 99 99999-9999"
+                value={whatsapp}
+                onChange={(event) => setWhatsapp(event.target.value)}
               />
             </div>
 

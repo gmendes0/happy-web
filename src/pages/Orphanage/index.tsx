@@ -27,6 +27,7 @@ interface Orphanage {
   name: string;
   open_on_weekends: boolean;
   opening_hours: string;
+  whatsapp: string;
 }
 
 interface OrphanageRouteParams {
@@ -135,10 +136,18 @@ export default function Orphanage() {
               )}
             </div>
 
-            {/* <button type="button" className="contact-button">
+            <a
+              href={`https://wa.me/${orphanage.whatsapp}?text=${encodeURI(
+                "Olá, gostaria de fazer uma visita."
+              )}`}
+              target="blank_"
+              rel="noopener noreferrer"
+              type="button"
+              className="contact-button"
+            >
               <FaWhatsapp size={20} color="#FFF" />
               Entrar em contato
-            </button> */}
+            </a>
           </div>
         </div>
       </main>
